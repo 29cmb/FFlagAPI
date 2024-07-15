@@ -10,6 +10,7 @@ module.exports = (app) => {
         await db.client.connect()
         const flag = await db.collections.fflags.findOne({ flag: body.flag })
         if(!flag) return res.status(404).json({ success: false, message: "Flag not found (Use /create to make a new one)" })
+        if(flag.locked == true) res.status(403).json({ success: false, message: "Selected flag is locked and is read only."})
 
         await db.collections.fflags.updateOne({ flag: body.flag }, { "$set": {
             value: body.value
