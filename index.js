@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const fs = require("fs")
+require("dotenv").config()
 app.use(express.json())
 
 app.listen(process.env.PORT || 3000, () => {
