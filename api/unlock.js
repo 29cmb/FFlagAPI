@@ -1,6 +1,6 @@
 const db = require("../modules/db.js")
 module.exports = (app) => {
-    app.post("/lock", async (req, res) => {
+    app.post("/unlock", async (req, res) => {
         const { body } = req
         if(!body || !body.flag) return res.status(400).json({ success: false, message: "Flag not provided" })
 
@@ -9,14 +9,14 @@ module.exports = (app) => {
         if(!flag) return res.status(404).json({ success: false, message: "Flag not found or not registered" })
 
         await db.collections.fflag.updateOne({ flag: body.flag }, {"$set": {
-            locked: true
+            locked: false
         }})
 
-        res.status(200).json({ success: true, message: "Flag has been locked" })
+        res.status(200).json({ success: true, message: "Flag has been unlocked" })
         await db.client.close()
     })
     return {
         method: "POST",
-        route: "/lock"
+        route: "/unlock"
     }
 }
