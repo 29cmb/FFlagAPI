@@ -7,7 +7,7 @@ module.exports = (app) => {
         const flag = await db.collections.fflags.findOne({ flag: body.flag })
         if(flag) return res.status(400).json({ success: false, message: "Flag already exists" })
         
-        await db.collections.fflags.insertOne({ flag: body.flag, value: body.value })
+        await db.collections.fflags.insertOne({ flag: body.flag, value: body.value, locked: false })
         await db.client.close()
 
         res.status(400).json({ success: true, message: "Flag has been created"})
