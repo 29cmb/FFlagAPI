@@ -21,3 +21,5 @@ for (const file of apiFiles) {
         console.log(`❌ | API route '${filePath}' did not return data.method or did not return data.route`)
     }
 }
+
+require("./modules/db.js").run()

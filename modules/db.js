@@ -1,5 +1,6 @@
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
+console.log(`mongodb+srv://${process.env.DATABASEUSER}:${process.env.DATABASEPASS}@${process.env.DATABASEURI}/?retryWrites=true&w=majority&appName=${process.env.DATABASEAPPNAME}`)
 const uri = `mongodb+srv://${process.env.DATABASEUSER}:${process.env.DATABASEPASS}@${process.env.DATABASEURI}/?retryWrites=true&w=majority&appName=${process.env.DATABASEAPPNAME}`;
 const client = new MongoClient(uri, {
   serverApi: {
