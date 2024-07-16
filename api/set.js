@@ -1,5 +1,6 @@
 const logging = require("../config/logging.json")
 const db = require("../modules/db.js")
+const sendLogEvent = require("../modules/sendLogEvent.js")
 module.exports = (app) => {
     app.post("/set", async (req, res) => {
         const { body } = req
@@ -15,11 +16,12 @@ module.exports = (app) => {
 
         if(logging.logChanges || (logging.whitelist && body.flag in logging.whitelistedFlags)) {
             var logMessage = `${body.flag} was set to value ${body.value}, old value ${flag.value}`
-            if(typeof body.value == "boolean"){
-                logMessage = `${body.flag} was changed from ${typeof flag.value == "boolean" ? (flag.value == true ? "✅" : "❌") : flag.value} -> ${body.value == true ? "✅" : "❌"}`
+            if(typeof body.value == "boolean" || typeof flag.value == "boolean"){
+                logMessage = `${body.flag} was changed from ${typeof flag.value == "boolean" ? (flag.value == true ? "✅" : "❌") : flag.value} -> ${typeof body.value == "boolean" ? (body.value == true ? "✅" : "❌") : body.value}`
             }
 
             await db.collections.logs.insertOne({ flag: body.flag, message: logMessage, time: Date.now() })
+            sendLogEvent(logMessage)
         }
 
         await db.collections.fflags.updateOne({ flag: body.flag }, { "$set": {

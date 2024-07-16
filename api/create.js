@@ -1,5 +1,6 @@
 const logging = require("../config/logging.json")
 const db = require("../modules/db.js")
+const sendLogEvent = require("../modules/sendLogEvent.js")
 module.exports = (app) => {
     app.post("/create", async (req, res) => {
         const { body } = req
@@ -15,6 +16,7 @@ module.exports = (app) => {
             }
 
             await db.collections.logs.insertOne({ flag: body.flag, message: logMessage, time: Date.now() })
+            sendLogEvent(logMessage)
         }
 
         await db.collections.fflags.insertOne({ flag: body.flag, value: body.value, locked: false })
