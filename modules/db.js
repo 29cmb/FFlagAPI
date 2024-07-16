@@ -23,6 +23,7 @@ module.exports = {
             this.databases.main = db
             this.collections.fflags = db.collection(process.env.FFlagsCollectionName)
             this.collections.logs = db.collection(process.env.LogsCollection)
+            this.collections.webhooks = db.collection(process.env.WebhooksCollection)
 
             // ping
             await db.command({ ping: 1 });
