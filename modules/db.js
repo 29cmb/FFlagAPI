@@ -22,6 +22,7 @@ module.exports = {
             const db = client.db(process.env.DATABASENAME)
             this.databases.main = db
             this.collections.fflags = db.collection(process.env.FFlagsCollectionName)
+            this.collections.logs = db.collection(process.env.LogsCollection)
 
             // ping
             await db.command({ ping: 1 });
