@@ -1,5 +1,5 @@
 const db = require("./db.js")
-const axios = require("axois")
+const axios = require("axios")
 module.exports = async(message) => {
     await db.client.connect()
     const webhooks = await db.collections.webhooks.find().toArray()

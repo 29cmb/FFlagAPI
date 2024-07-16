@@ -2,7 +2,7 @@ const logging = require("../config/logging.json")
 const db = require("../modules/db.js")
 const sendLogEvent = require("../modules/sendLogEvent.js")
 module.exports = (app) => {
-    app.post("/set", async (req, res) => {
+    app.post("/api/set", async (req, res) => {
         const { body } = req
 
         if(!body || !body.flag || !body.value) {
@@ -32,6 +32,6 @@ module.exports = (app) => {
     })
     return {
         method: "POST",
-        route: "/set"
+        route: "/api/set"
     }
 }

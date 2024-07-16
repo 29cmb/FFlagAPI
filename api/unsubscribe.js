@@ -1,6 +1,6 @@
 const db = require("../modules/db.js")
 module.exports = (app) => {
-    app.post("/unsubscribe", async (req, res) => {
+    app.post("/api/unsubscribe", async (req, res) => {
         const { body } = req
         const { url } = body
         if(!body || !url) return res.status(400).json({ success: false, message: "Webhook URL not provided" })
@@ -13,6 +13,6 @@ module.exports = (app) => {
     })
     return {
         method: "POST",
-        route: "/unsubscribe"
+        route: "/api/unsubscribe"
     }
 }

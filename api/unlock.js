@@ -1,6 +1,6 @@
 const db = require("../modules/db.js")
 module.exports = (app) => {
-    app.post("/unlock", async (req, res) => {
+    app.post("/api/unlock", async (req, res) => {
         const { body } = req
         if(!body || !body.flag) return res.status(400).json({ success: false, message: "Flag not provided" })
 
@@ -17,6 +17,6 @@ module.exports = (app) => {
     })
     return {
         method: "POST",
-        route: "/unlock"
+        route: "/api/unlock"
     }
 }

@@ -2,7 +2,7 @@ const logging = require("../config/logging.json")
 const db = require("../modules/db.js")
 const sendLogEvent = require("../modules/sendLogEvent.js")
 module.exports = (app) => {
-    app.post("/create", async (req, res) => {
+    app.post("/api/create", async (req, res) => {
         const { body } = req
         await db.client.connect()
         if(!body || !body.flag || !body.value) return res.status(400).json({ success: false, message: "Flag or value not provided" })
@@ -26,6 +26,6 @@ module.exports = (app) => {
     })
     return {
         method: "POST",
-        route: "/create"
+        route: "/api/create"
     }
 }
