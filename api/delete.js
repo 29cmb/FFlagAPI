@@ -22,7 +22,7 @@ module.exports = (app) => {
         await db.collections.fflags.deleteOne({ flag: body.flag  })
         await db.client.close()
 
-        res.status(200).json({ success: true, message: "Flag has been deleted"})
+        res.status(200).json({ success: true, message: "Flag has been deleted", old: flag.value})
     })
     return {
         method: "POST",
