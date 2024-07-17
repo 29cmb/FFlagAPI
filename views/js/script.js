@@ -7,10 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('editButton').addEventListener('click', () => {
         toggleEditMode()
     })
-
-    document.getElementById("createButton").addEventListener('click', () => {
-        createNew()
-    })
 });
 
 var originalData = []
