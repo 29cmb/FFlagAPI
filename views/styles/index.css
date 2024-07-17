@@ -37,8 +37,7 @@ td {
     font-family: "IBM Plex Mono", monospace;
 }
 
-.edit-button,
-.create-button {
+.edit-button {
     position: absolute;
     background-color: #007bff;
     color: white;
@@ -54,11 +53,6 @@ td {
 .edit-button {
     top: 10px;
     left: 10px;
-}
-
-.create-button {
-    top: 10px;
-    left: 50px;
 }
 
 code {

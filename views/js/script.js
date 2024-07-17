@@ -89,17 +89,3 @@ function saveChanges() {
         console.log(d)
     })
 }
-
-function createNew(){
-    const tbody = document.querySelector('#dashboard tbody')
-    const row = document.createElement('tr')
-    const flagCell = document.createElement('td')
-    flagCell.innerHTML = `<code>Key</code>`
-    row.appendChild(flagCell)
-
-    const valueCell = document.createElement('td')
-    valueCell.innerHTML = "Value"
-    row.appendChild(valueCell)
-
-    tbody.appendChild(row)
-}
