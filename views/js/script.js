@@ -70,5 +70,15 @@ function saveChanges() {
         }
     });
 
-    // handle the saving
+    fetch("/api/bulkUpdate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            flags: changed
+        })
+    }).then(response => response.json()).then(d => {
+        console.log(d)
+    })
 }
