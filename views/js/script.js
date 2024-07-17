@@ -5,8 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching data:', error));
         
     document.getElementById('editButton').addEventListener('click', () => {
-        toggleEditMode();
-    });
+        toggleEditMode()
+    })
+
+    document.getElementById("createButton").addEventListener('click', () => {
+        createNew()
+    })
 });
 
 var originalData = []
@@ -22,6 +26,7 @@ function createTable(data) {
         row.appendChild(flagCell)
 
         const valueCell = document.createElement('td')
+        valueCell.id = "valueCell"
         valueCell.innerHTML = (typeof item.value == "boolean") ? (item.value == true ? "✅" : "❌") : item.value
         row.appendChild(valueCell)
 
@@ -35,15 +40,17 @@ function toggleEditMode() {
     const cells = document.querySelectorAll('#dashboard tbody td')
 
     cells.forEach(cell => {
-        if(isEditing){
-            if(cell.textContent.trim() == "✅") cell.innerHTML = "true"
-            if(cell.textContent.trim() == "❌") cell.innerHTML = "false"
-        } else {
-            if(cell.textContent.trim() == "true") cell.innerHTML = "✅"
-            if(cell.textContent.trim() == "false") cell.innerHTML = "❌"
+        if(cell.id === "valueCell"){
+            if(isEditing){
+                if(cell.textContent.trim() == "✅") cell.innerHTML = "true"
+                if(cell.textContent.trim() == "❌") cell.innerHTML = "false"
+            } else {
+                if(cell.textContent.trim() == "true") cell.innerHTML = "✅"
+                if(cell.textContent.trim() == "false") cell.innerHTML = "❌"
+            }
+            
+            cell.setAttribute('contenteditable', isEditing)
         }
-        
-        cell.setAttribute('contenteditable', isEditing)
     });
 
     if (isEditing) {
@@ -59,14 +66,14 @@ function saveChanges() {
     const changed = []
 
     rows.forEach((row, index) => {
-        const flag = row.cells[0].textContent.trim();
-        var value = row.cells[1].textContent.trim();
+        const flag = row.cells[0].textContent.trim()
+        var value = row.cells[1].textContent.trim()
 
-        if (value === "✅") value = true;
-        if (value === "❌") value = false;
+        if (value === "✅") value = true
+        if (value === "❌") value = false
 
         if (value !== originalData[index].value) {
-            changed.push({ flag, value });
+            changed.push({ flag, value })
         }
     });
 
@@ -81,4 +88,18 @@ function saveChanges() {
     }).then(response => response.json()).then(d => {
         console.log(d)
     })
+}
+
+function createNew(){
+    const tbody = document.querySelector('#dashboard tbody')
+    const row = document.createElement('tr')
+    const flagCell = document.createElement('td')
+    flagCell.innerHTML = `<code>Key</code>`
+    row.appendChild(flagCell)
+
+    const valueCell = document.createElement('td')
+    valueCell.innerHTML = "Value"
+    row.appendChild(valueCell)
+
+    tbody.appendChild(row)
 }

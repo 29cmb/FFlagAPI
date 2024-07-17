@@ -9,10 +9,10 @@ module.exports = (app) => {
         
         for (const f of body.flags) {
             if (await db.collections.fflags.findOne({ flag: f.flag })) {
-                await db.collections.fflags.updateOne({ flag: f.flag }, { "$set": { value: f.value } });
-                responses.push(`${f.flag} has been set to value ${f.value}`);
+                await db.collections.fflags.updateOne({ flag: f.flag }, { "$set": { value: f.value } })
+                responses.push(`${f.flag} has been set to value ${f.value}`)
             } else {
-                responses.push(`${f.flag} does not exist`);
+                responses.push(`${f.flag} does not exist`)
             }
         }
 
