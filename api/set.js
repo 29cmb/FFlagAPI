@@ -21,9 +21,9 @@ module.exports = (app) => {
             }
 
             await db.collections.logs.insertOne({ flag: body.flag, message: logMessage, time: Date.now() })
-            sendLogEvent(logMessage)
+            await sendLogEvent(logMessage)
         }
-
+        
         await db.collections.fflags.updateOne({ flag: body.flag }, { "$set": {
             value: body.value
         }})

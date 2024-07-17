@@ -9,16 +9,15 @@ function createTable(data) {
     const tbody = document.querySelector('#dashboard tbody');
     
     data.forEach(item => {
-        const row = document.createElement('tr');
-        const code = document.createElement("code")
-        const flagCell = document.createElement('td');
-        flagCell.innerHTML = `<code>${item.flag}</code>`;
-        row.appendChild(flagCell);
+        const row = document.createElement('tr')
+        const flagCell = document.createElement('td')
+        flagCell.innerHTML = `<code>${item.flag}</code>`
+        row.appendChild(flagCell)
 
-        const valueCell = document.createElement('td');
+        const valueCell = document.createElement('td')
         valueCell.innerHTML = (typeof item.value == "boolean") ? (item.value == true ? "✅" : "❌") : item.value
-        row.appendChild(valueCell);
+        row.appendChild(valueCell)
 
-        tbody.appendChild(row);
+        tbody.appendChild(row)
     });
 }
