@@ -11,7 +11,7 @@ module.exports = (app) => {
 
         await db.client.close()
 
-        res.status(400).json({ success: true, value: flag.value })
+        res.status(200).json({ success: true, value: flag.value })
     })
     return {
         method: "POST",

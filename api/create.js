@@ -22,7 +22,7 @@ module.exports = (app) => {
         await db.collections.fflags.insertOne({ flag: body.flag, value: body.value, locked: false })
         await db.client.close()
 
-        res.status(400).json({ success: true, message: "Flag has been created"})
+        res.status(200).json({ success: true, message: "Flag has been created"})
     })
     return {
         method: "POST",
