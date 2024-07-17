@@ -2,7 +2,7 @@ const db = require("../modules/db.js")
 module.exports = (app) => {
     app.post("/api/lock", async (req, res) => {
         const { body } = req
-        if(!body || !body.flag) return res.status(400).json({ success: false, message: "Flag not provided" })
+        if(!body || body.flag == undefined) return res.status(400).json({ success: false, message: "Flag not provided" })
 
         await db.client.connect()
         const flag = await db.collections.fflag.findOne({ flag: body.flag })

@@ -5,7 +5,7 @@ module.exports = (app) => {
     app.post("/api/set", async (req, res) => {
         const { body } = req
 
-        if(!body || !body.flag || !body.value) {
+        if(body == undefined || body.flag == undefined || body.value == undefined) {
             return res.status(400).json({ success: false, message: "Flag or Value not provided"})
         }
 
